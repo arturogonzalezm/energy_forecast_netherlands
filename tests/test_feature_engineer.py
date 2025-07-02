@@ -6,7 +6,7 @@ Tests timestamp parsing, lag feature creation, and time-based feature generation
 import pytest
 from datetime import datetime
 from pyspark.sql import SparkSession, Row
-from pyspark.sql.types import StructType, StructField, StringType, DoubleType, TimestampType, IntegerType
+from pyspark.sql.types import StructType, StructField, StringType, DoubleType, IntegerType
 import pyspark.sql.functions as F
 
 from src.etl.feature_engineer import FeatureEngineer
