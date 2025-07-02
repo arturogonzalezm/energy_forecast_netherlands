@@ -1,6 +1,11 @@
+"""
+Test cases for the DataLoader class in the ETL pipeline.
+"""
+
 import pytest
 from pyspark.sql import SparkSession
 from src.etl.data_loader import DataLoader
+
 
 @pytest.fixture(scope="session")
 def spark_fixture():
@@ -12,6 +17,7 @@ def spark_fixture():
     spark.sparkContext.setLogLevel("ERROR")
     yield spark
     spark.stop()
+
 
 @pytest.fixture
 def sample_csv(tmp_path):
@@ -26,6 +32,7 @@ def sample_csv(tmp_path):
     file_path = tmp_path / "test.csv"
     file_path.write_text(content)
     return str(file_path)
+
 
 def test_load_parses_rows(spark_fixture, sample_csv):
     # Given a CSV with two valid data lines
@@ -51,3 +58,7 @@ def test_load_parses_rows(spark_fixture, sample_csv):
     assert pytest.approx(second['nonrenewable'], rel=1e-3) == 210.0
     assert pytest.approx(second['renewable'], rel=1e-3) == 310.0
     assert pytest.approx(second['price'], rel=1e-3) == 60.0
+
+
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])
