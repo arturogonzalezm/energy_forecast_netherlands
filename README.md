@@ -182,7 +182,7 @@ Where:
 
 ### Prerequisites
 ```bash
-pip install pyspark pandas statsmodels
+pip install -r requirements.txt
 ```
 
 ### Running the Pipeline
